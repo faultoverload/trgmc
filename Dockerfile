@@ -6,13 +6,9 @@ RUN bun install --frozen-lockfile
 COPY . .
 RUN bun run build
 
-# Production stage
+# Final stage
 FROM oven/bun:1-alpine
 WORKDIR /app
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/package.json ./
-COPY --from=builder /app/bun.lockb ./
-RUN bun install --frozen-lockfile --production
-
+COPY --from=builder /app/dist .
 EXPOSE 3000
-CMD ["bun", "run", "start"]
+ENTRYPOINT ["bun", "run", "index.html"]
