@@ -11,4 +11,4 @@ FROM oven/bun:1-alpine
 WORKDIR /app
 COPY --from=builder /app/dist .
 EXPOSE 3000
-ENTRYPOINT ["bun", "serve"]
+ENTRYPOINT ["bun", "run", "index.html"]
